@@ -1,4 +1,5 @@
 import 'package:blog_app/Components/RoundedButton.dart';
+import 'package:blog_app/auth/Register_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,17 +20,26 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image(
+           const Image(
               image: AssetImage('images/firebase_image2.png'),
             ),
             SizedBox(
               height: height * 0.03,
             ),
-            RoundedButton(title: 'Log In'),
+            RoundedButton(
+              title: 'Log In',
+              onPress: () {},
+            ),
             SizedBox(
               height: height * 0.03,
             ),
-            RoundedButton(title: 'Register')
+            RoundedButton(
+              title: 'Register',
+              onPress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const RegisterScreen()));
+              },
+            )
           ],
         ),
       ),
