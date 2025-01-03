@@ -1,15 +1,16 @@
 import 'package:blog_app/Components/RoundedButton.dart';
+import 'package:blog_app/auth/Login_screen.dart';
 import 'package:blog_app/auth/Register_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class OptionScreen extends StatefulWidget {
+  const OptionScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<OptionScreen> createState() => _OptionScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _OptionScreenState extends State<OptionScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           const Image(
+            const Image(
               image: AssetImage('images/firebase_image2.png'),
             ),
             SizedBox(
@@ -28,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             RoundedButton(
               title: 'Log In',
-              onPress: () {},
+              onPress: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
             ),
             SizedBox(
               height: height * 0.03,
@@ -36,8 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
             RoundedButton(
               title: 'Register',
               onPress: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterScreen()));
               },
             )
           ],

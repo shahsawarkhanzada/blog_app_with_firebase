@@ -1,6 +1,3 @@
-
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -97,24 +94,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (user != null) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('User has been created')));
-                           }
+                          }
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
                         }
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Colors.orange),
-                        height: height * 0.06,
-                        width: width,
-                        child: const Center(
-                            child: Text(
-                          'Get Register',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        )),
+                      child: InkWell(
+                        onTap: () async {
+                          if (formkey.currentState!.validate()) {}
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.orange),
+                          height: height * 0.06,
+                          width: width,
+                          child: const Center(
+                              child: Text(
+                            'Get Register',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
+                          )),
+                        ),
                       ),
                     )
                   ],

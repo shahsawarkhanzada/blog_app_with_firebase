@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () async {
                         try {
-                          auth.createUserWithEmailAndPassword(
+                          auth.signInWithEmailAndPassword(
                               email: emailController.text.toString(),
                               password: passwordController.text.toString());
                           ScaffoldMessenger.of(context).showSnackBar(

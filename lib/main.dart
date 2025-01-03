@@ -1,4 +1,4 @@
-import 'package:blog_app/View/HomeScreen.dart';
+import 'package:blog_app/View/OptionScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const OptionScreen(),
     );
   }
 }
