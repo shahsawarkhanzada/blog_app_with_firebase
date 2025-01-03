@@ -1,4 +1,6 @@
-import 'package:blog_app/Components/RoundedButton.dart';
+
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -95,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (user != null) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('User has been created')));
-                          }
+                           }
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
