@@ -87,15 +87,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onTap: () async {
                         if (formkey.currentState!.validate()) {}
                         try {
-                          final user =
-                              await auth.createUserWithEmailAndPassword(
-                                  email: emailController.text.toString(),
-                                  password: passwordController.text.toString());
+                          auth.createUserWithEmailAndPassword(
+                              email: emailController.text.toString(),
+                              password: passwordController.text.toString());
 
-                          if (user != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('User has been created')));
-                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('User has been created')));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
