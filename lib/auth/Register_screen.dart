@@ -85,6 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     InkWell(
                       onTap: () async {
+                        if (formkey.currentState!.validate()) {}
                         try {
                           final user =
                               await auth.createUserWithEmailAndPassword(
@@ -100,23 +101,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               SnackBar(content: Text(e.toString())));
                         }
                       },
-                      child: InkWell(
-                        onTap: () async {
-                          if (formkey.currentState!.validate()) {}
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: Colors.orange),
-                          height: height * 0.06,
-                          width: width,
-                          child: const Center(
-                              child: Text(
-                            'Get Register',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          )),
-                        ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Colors.orange),
+                        height: height * 0.06,
+                        width: width,
+                        child: const Center(
+                            child: Text(
+                          'Get Register',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
+                        )),
                       ),
                     )
                   ],
