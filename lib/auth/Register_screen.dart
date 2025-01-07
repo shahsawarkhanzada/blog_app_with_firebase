@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:blog_app/auth/Login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -87,13 +90,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onTap: () async {
                         if (formkey.currentState!.validate()) {}
                         try {
-                          auth.createUserWithEmailAndPassword(
-                              email: emailController.text.toString(),
-                              password: passwordController.text.toString());
+                          await auth.createUserWithEmailAndPassword(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
 
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text('User has been created')));
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'email-already-in-use') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Email is already taken. Try a new email address')));
+                          } else if (e.code == 'invalid-email') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Email type is invalid')));
+                          }
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:blog_app/View/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                'Log In',
+                'LogIn Yourself',
                 style: TextStyle(
                     color: Colors.orange,
                     fontSize: 28,
@@ -86,12 +87,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () async {
                         try {
-                          auth.signInWithEmailAndPassword(
-                              email: emailController.text.toString(),
-                              password: passwordController.text.toString());
+                          await auth.signInWithEmailAndPassword(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text('You are logged in')));
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'invalid-email') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Invalid email format')));
+                          } else if (e.code == 'wrong-password') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('Incorrect password entered')));
+                          } else if (e.code == 'user-not-found') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('No user found with this email')));
+                          }
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(e.toString())));
