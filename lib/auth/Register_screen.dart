@@ -111,6 +111,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           } else if (e.code == 'invalid-email') {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text('Email type is invalid')));
+                          } else if (e.code == 'invalid-password') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content:
+                                    Text('Password should be 6 characters')));
                           }
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
