@@ -1,16 +1,28 @@
-# blog_app
+#Uploading file to firebse database
 
-A new Flutter project.
+1. Create the Realtime database in your firebase console project
 
-## Getting Started
+2. Initialize the firebase_storage in the file
 
-This project is a starting point for a Flutter application.
+3. create the reference for firebase_database
 
-A few resources to get you started if this is your first Flutter project:
+4. create the reference for firebase_auth
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+5. Now go to upload button. below all steps are done in the upload button logic.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+6. create a variable for date
+
+7. create the reference variale of // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref('/projectname $date')
+
+8. Create a try and cath method. Do all the below steps in try method 
+
+9. create uploadTask variable to upload the file // firebase_storage.UploadTask uploadtask = ref.putFile(image!.absolute);
+
+10. wait for the file to upload  //await Future.value(uploadtask)
+
+11. Save the Url of uploaded image in a variable // var newUrl = await ref.detDownloadURL()
+
+12. Create a variable for user to get info of current loggedIn User. 
+
+13. Now, Save the file to the node of the database created using the references created for firebase_database in point 3  // blogRef.child('Blog List').child(date.toString()).set().then().OnError()
+
