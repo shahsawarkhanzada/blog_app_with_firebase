@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:blog_app/View/HomeScreen.dart';
+import 'package:blog_app/auth/forgot_passwrod_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => const HomeScreen()));
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'invalid-email') {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -132,7 +133,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontSize: 18, fontWeight: FontWeight.w600),
                         )),
                       ),
-                    )
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen()));
+                        },
+                        child: const Text('Forgot Passwrod?'))
                   ],
                 ),
               ),
