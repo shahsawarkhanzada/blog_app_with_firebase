@@ -1,4 +1,7 @@
+import 'package:blog_app/View/OptionScreen.dart';
 import 'package:blog_app/View/addPost.dart';
+import 'package:blog_app/auth/Login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
@@ -22,13 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddPostScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddPostScreen()));
               },
               child: const Icon(Icons.add)),
           const SizedBox(
             width: 15,
-          )
+          ),
+          InkWell(
+              onTap: () {
+                auth.signOut().then((value) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                });
+              },
+              child: const Icon(Icons.logout)),
+          const SizedBox(
+            width: 15,
+          ),
         ],
       ),
       body: Column(

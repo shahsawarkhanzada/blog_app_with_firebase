@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blog_app/Components/RoundedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -163,33 +164,35 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     try {
                       int date = DateTime.now().microsecondsSinceEpoch;
 
-                      firebase_storage.Reference ref = firebase_storage
-                          .FirebaseStorage.instance
-                          .ref('/blog_app_with_firebase $date');
-                      firebase_storage.UploadTask uploadTask =
-                          ref.putFile(image!.absolute);
+                      firebase_storage.Reference ref =
+                          storage.ref('/blogapp$date');
+
+                      debugPrint('Firebase Storage Path: ${ref.fullPath}');
+
+                      UploadTask uploadTask = ref.putFile(image!.absolute);
 
                       await Future.value(uploadTask);
                       var newUrl = await ref.getDownloadURL();
 
                       final user = auth.currentUser;
 
-                      blogRef
-                          .child('Blog List')
-                          .child(date.toString())
-                          .set({'blogId': date.toString(), 
-                          'blogImage' : newUrl.toString(),
-                          'blogTime' : date.toString(),
-                          'blogTitle' : titleController.text.toString(),
-                          'blogDescription' : descriptionController.text.toString(),
-                          'userEmail' : user!.email.toString(),
-                          'userId' : user.uid.toString()}).then((value) {
-                                                  ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(content: Text('Blog has been published')));
-                          }).onError((error, stackTrace) {
-                                                  ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text(error.toString())));
-                          });
+                      blogRef.child('Blog List').child(date.toString()).set({
+                        'blogId': date.toString(),
+                        'blogImage': newUrl.toString(),
+                        'blogTime': date.toString(),
+                        'blogTitle': titleController.text.toString(),
+                        'blogDescription':
+                            descriptionController.text.toString(),
+                        'userEmail': user!.email.toString(),
+                        'userId': user.uid.toString()
+                      }).then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Blog has been published')));
+                      }).onError((error, stackTrace) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(error.toString())));
+                      });
                     } catch (e) {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(content: Text(e.toString())));

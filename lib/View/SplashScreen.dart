@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:blog_app/View/HomeScreen.dart';
+import 'package:blog_app/View/OptionScreen.dart';
 import 'package:blog_app/auth/Login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Timer(
           const Duration(seconds: 3),
-          () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginScreen())));
+          () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => OptionScreen())));
     }
   }
 
